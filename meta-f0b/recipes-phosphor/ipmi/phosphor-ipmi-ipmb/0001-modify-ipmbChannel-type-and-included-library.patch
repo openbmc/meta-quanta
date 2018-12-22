@@ -1,0 +1,40 @@
+From 859030c36562cf71a97542a72493f0d72816f8be Mon Sep 17 00:00:00 2001
+From: Samuel Jiang <Samuel.Jiang@quantatw.com>
+Date: Tue, 27 Nov 2018 10:38:31 +0800
+Subject: [PATCH] modify ipmbChannel type and included library
+
+---
+ ipmbbridged.cpp | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
+
+diff --git a/ipmbbridged.cpp b/ipmbbridged.cpp
+index 2f78cd0..f7b6d3b 100644
+--- a/ipmbbridged.cpp
++++ b/ipmbbridged.cpp
+@@ -18,7 +18,7 @@
+ #include "ipmbdefines.hpp"
+ #include "ipmbutils.hpp"
+
+-#include <linux/i2c-dev-user.h>
++#include <linux/i2c-dev.h>
+
+ #include <phosphor-logging/log.hpp>
+ #include <tuple>
+@@ -40,12 +40,12 @@ auto conn = std::make_shared<sdbusplus::asio::connection>(io);
+  */
+ static const std::vector<IpmbChannelConfig> ipmbChannelsConfig = {
+     // ME channel
+-    {ipmbChannelType::me, "/sys/bus/i2c/devices/5-1010/slave-mqueue",
+-     "/dev/i2c-5", 0x20, 0x2C}, // 8 bit addresses
++    {ipmbChannelType::me, "/sys/bus/i2c/devices/4-0010/slave-mqueue",
++     "/dev/i2c-4", 0x20, 0x2C}, // 8 bit addresses
+     // IPMB header channel
+-    {ipmbChannelType::ipmb, "/sys/bus/i2c/devices/0-1010/slave-mqueue",
+-     "/dev/i2c-0", 0x20, 0x58}}; // 8 bit addresses
+-
++    //{ipmbChannelType::ipmb, "/sys/bus/i2c/devices/0-1010/slave-mqueue",
++    // "/dev/i2c-0", 0x20, 0x58}}; // 8 bit addresses
++	};
+ static std::list<IpmbChannel> ipmbChannels;
+
+ /**
