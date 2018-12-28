@@ -1,0 +1,38 @@
+From ada46bfa68e00a7f483874c434eddd33162fad0f Mon Sep 17 00:00:00 2001
+From: Samuel Jiang <Samuel.Jiang@quantatw.com>
+Date: Thu, 27 Dec 2018 11:18:12 +0800
+Subject: [PATCH] update SPMOD 0 -> 7 update MFSEL1 HSI1SEL 0 -> 1
+
+---
+ board/nuvoton/PolegSVB/PolegSVB_init.c | 18 ++++++++++++++++++
+ 1 file changed, 18 insertions(+)
+
+diff --git a/board/nuvoton/PolegSVB/PolegSVB_init.c b/board/nuvoton/PolegSVB/PolegSVB_init.c
+index 797697b355..8dee6253be 100644
+--- a/board/nuvoton/PolegSVB/PolegSVB_init.c
++++ b/board/nuvoton/PolegSVB/PolegSVB_init.c
+@@ -63,6 +63,24 @@ int print_cpuinfo (void)
+ 	printf("\n" KNRM);
+ 
+ 	printf("PolegSVB Power-On Straps = 0x%x\n",(unsigned int)*((PTR32)(GCR_BASE_ADDR + 0x004)));
++	unsigned int reg32, reg32s;
++	reg32 = *((volatile uint32_t *)(GCR_BASE_ADDR + 0x038));
++    reg32 = (reg32 | 0x06);
++	printf("Nuvopton reg32=0x%02x\n",reg32);
++	printf("Nuvoton SPMOD address=0x%p\n",(GCR_BASE_ADDR + 0x038));
++	*((volatile uint32_t *)(GCR_BASE_ADDR + 0x038)) = reg32;
++	printf("Nuvoton update SPMOD=0x%02x\n",*((volatile uint32_t *)(GCR_BASE_ADDR + 0x038)));
++
++	reg32s = *((volatile uint32_t *)(GCR_BASE_ADDR+0x00c));
++	printf("Nuvopton reg32s=0x%02x\n",reg32s);
++	reg32s = (reg32s | 0x400);
++	*((volatile uint32_t *)(GCR_BASE_ADDR+0x00c)) = reg32s;
++	printf("Nuvopton update reg32s=0x%02x\n",reg32s);
++
++
++
++
++	//Update SPMOD
+ 
+ 	if (STRP_SecureBoot_On())
+ 	{
