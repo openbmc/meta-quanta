@@ -1,0 +1,36 @@
+From 5b9402a85464c5d100868ddb2c2a04c17afdab10 Mon Sep 17 00:00:00 2001
+From: Samuel Jiang <Samuel.Jiang@quantatw.com>
+Date: Thu, 10 Jan 2019 16:23:31 +0800
+Subject: [PATCH] Update SPI label
+
+---
+ arch/arm/boot/dts/nuvoton-npcm750-runbmc.dts | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+diff --git a/arch/arm/boot/dts/nuvoton-npcm750-runbmc.dts b/arch/arm/boot/dts/nuvoton-npcm750-runbmc.dts
+index de9751a9b37a..4034f209aa80 100644
+--- a/arch/arm/boot/dts/nuvoton-npcm750-runbmc.dts
++++ b/arch/arm/boot/dts/nuvoton-npcm750-runbmc.dts
+@@ -141,7 +141,7 @@
+ 			status = "okay";
+ 			spi-nor@0 {
+ 				compatible = "jedec,spi-nor";
+-				#address-cells = <1>;
++        #address-cells = <1>;
+ 				#size-cells = <1>;
+ 				reg = <0>;
+ 				spi-rx-bus-width = <2>;
+@@ -149,6 +149,10 @@
+ 						compatible = "fixed-partitions";
+ 						#address-cells = <1>;
+ 						#size-cells = <1>;
++            bmc@0{
++              label = "bmc";
++              reg = <0x000000 0x2000000>;
++            };
+ 						u-boot@0 {
+ 							label = "u-boot";
+ 							reg = <0x0000000 0x80000>;
+-- 
+2.17.1
+
