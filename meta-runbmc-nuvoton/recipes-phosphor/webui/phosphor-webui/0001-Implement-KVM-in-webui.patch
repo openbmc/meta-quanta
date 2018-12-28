@@ -1,0 +1,248 @@
+From 9da0f690b5486c0da313fc1d1259e1cc65f86705 Mon Sep 17 00:00:00 2001
+From: Ed Tanous <ed.tanous@intel.com>
+Date: Thu, 3 Jan 2019 12:58:09 +0800
+Subject: [PATCH 1/2] Implement KVM in webui
+
+This patchset is the beginings of the infrastructure to allow KVM
+sessions through the webui.  It should not be considered complete, and
+requires a websocket capable VNC/RFB connection on the BMC.
+
+To access, open the url https://<hostname>/#kvm
+
+Change-Id: I9932fe116387aa81a8a627f8c5b0f568e0111892
+Signed-off-by: Ed Tanous <ed.tanous@intel.com>
+Signed-off-by: kwliu <kwliu@nuvoton.com>
+---
+ app/index.js                            |  6 +-
+ app/kvm/controllers/kvm-controller.html |  5 ++
+ app/kvm/controllers/kvm-controller.js   | 91 +++++++++++++++++++++++++
+ app/kvm/index.js                        | 29 ++++++++
+ app/kvm/styles/index.scss               |  1 +
+ app/kvm/styles/kvm.scss                 | 11 +++
+ app/styles/index.scss                   |  1 +
+ package.json                            |  3 +-
+ 8 files changed, 145 insertions(+), 2 deletions(-)
+ create mode 100644 app/kvm/controllers/kvm-controller.html
+ create mode 100644 app/kvm/controllers/kvm-controller.js
+ create mode 100644 app/kvm/index.js
+ create mode 100644 app/kvm/styles/index.scss
+ create mode 100644 app/kvm/styles/kvm.scss
+
+diff --git a/app/index.js b/app/index.js
+index e0bc431..fff4a16 100644
+--- a/app/index.js
++++ b/app/index.js
+@@ -79,6 +79,9 @@ import firmware_controller from './configuration/controllers/firmware-controller
+ import users_index from './users/index.js';
+ import user_accounts_controller from './users/controllers/user-accounts-controller.js';
+ 
++import kvm_index from './kvm/index.js';
++import kvm_controller from './kvm/controllers/kvm-controller.js';
++
+ window.angular && (function(angular) {
+   'use strict';
+ 
+@@ -94,7 +97,8 @@ window.angular && (function(angular) {
+             'app.common.filters',
+             // Model resources
+             'app.login', 'app.overview', 'app.serverControl',
+-            'app.serverHealth', 'app.configuration', 'app.users', 'app.redfish'
++            'app.serverHealth', 'app.configuration', 'app.users', 'app.redfish',
++            'app.kvm'
+           ])
+       // Route configuration
+       .config([
+diff --git a/app/kvm/controllers/kvm-controller.html b/app/kvm/controllers/kvm-controller.html
+new file mode 100644
+index 0000000..40e4d97
+--- /dev/null
++++ b/app/kvm/controllers/kvm-controller.html
+@@ -0,0 +1,5 @@
++<div id="noVNC_container">
++    <div id="noVNC_status_bar">
++        <div id="noVNC_left_dummy_elem"></div>
++    </div>
++</div>
+diff --git a/app/kvm/controllers/kvm-controller.js b/app/kvm/controllers/kvm-controller.js
+new file mode 100644
+index 0000000..08f8123
+--- /dev/null
++++ b/app/kvm/controllers/kvm-controller.js
+@@ -0,0 +1,91 @@
++/**
++ * Controller for kvm
++ *
++ * @module app/kvm
++ * @exports kvmController
++ * @name kvmController
++ */
++
++import RFB from '@novnc/novnc/core/rfb.js';
++import { init_logging as main_init_logging } from '@novnc/novnc/core/util/logging.js';
++
++
++window.angular && (function (angular) {
++    'use strict';
++
++    angular
++        .module('app.kvm')
++        .controller('kvmController', [
++            '$scope',
++            '$location',
++            '$window',
++            '$log',
++            function ($scope, $location, $window, $log) {
++                $scope.desktopName = "";
++                var rfb;
++
++                $scope.$on("$destroy", function () {
++                    if (rfb) {
++                        rfb.disconnect();
++                    }
++                });
++
++                function updateDesktopName(rfb, name) {
++                    $scope.desktopName = name;
++                };
++
++                function sendCtrlAltDel() {
++                    rfb.sendCtrlAltDel();
++                    return false;
++                };
++
++                function connected(e) {
++                    $log.debug("RFB Connected");
++                }
++                function disconnected(e) {
++                    $log.debug("RFB disconnected");
++                }
++
++		var host = $location.host();
++                var port = $location.port();
++                var target = angular.element(document.querySelector('#noVNC_container'))[0];
++                main_init_logging("debug");
++                try {
++                    rfb = new RFB(target,
++                        "wss://" + host + ":" + port + "/kvmws", {});
++
++                    rfb.addEventListener("connect", connected);
++                    rfb.addEventListener("disconnect", disconnected);
++                    rfb.addEventListener("desktopname", updateDesktopName);
++                } catch (exc) {
++                    $log.error(exc);
++                    updateState(null, 'fatal', null, 'Unable to create RFB client -- ' + exc);
++                    return; // don't continue trying to connect
++                };
++
++                function status(text, level) {
++                    var status_bar = angular.element(document.querySelector('#noVNC_status_bar'))[0];
++                    // Need to check if the status bar still exists.  On page change, it gets destroyed
++                    // when we swap to a different view.  The system will disconnect async
++                    if (status_bar) {
++                        status_bar.textContent = text;
++                    }
++
++                    var status = angular.element(document.querySelector('#noVNC_status'))[0];
++                    switch (level) {
++                        case 'normal':
++                        case 'warn':
++                        case 'error':
++                            break;
++                        default:
++                            level = "warn";
++                    }
++                    if (status) {
++                        status.setAttribute("class", "noVNC_status_" + level);
++                    }
++                };
++            }
++        ]
++        );
++
++})(angular);
+diff --git a/app/kvm/index.js b/app/kvm/index.js
+new file mode 100644
+index 0000000..a94e9a7
+--- /dev/null
++++ b/app/kvm/index.js
+@@ -0,0 +1,29 @@
++/**
++ * A module for the kvm
++ *
++ * @module app/kvm/index
++ * @exports app/kvm/index
++ * @version 0.0.1
++ */
++
++window.angular && (function (angular) {
++    'use strict';
++
++    angular
++        .module('app.kvm', [
++            'ngRoute',
++            'app.common.services'
++        ])
++        // Route configuration
++        .config(['$routeProvider', function ($routeProvider) {
++            $routeProvider
++                .when('/kvm', {
++                    'template': require('./controllers/kvm-controller.html'),
++                    'controller': 'kvmController',
++                    authenticated: true
++                })
++        }]);
++
++})(window.angular);
++
++
+diff --git a/app/kvm/styles/index.scss b/app/kvm/styles/index.scss
+new file mode 100644
+index 0000000..7bfbe63
+--- /dev/null
++++ b/app/kvm/styles/index.scss
+@@ -0,0 +1 @@
++@import "./kvm.scss";
+\ No newline at end of file
+diff --git a/app/kvm/styles/kvm.scss b/app/kvm/styles/kvm.scss
+new file mode 100644
+index 0000000..2f9e2c0
+--- /dev/null
++++ b/app/kvm/styles/kvm.scss
+@@ -0,0 +1,11 @@
++
++.noNVC_shown {
++  display: inline;
++}
++.noVNC_hidden {
++  display: none;
++}
++
++#noVNC_left_dummy_elem {
++  flex: 1;
++}
+diff --git a/app/styles/index.scss b/app/styles/index.scss
+index b59ed44..cb596c2 100644
+--- a/app/styles/index.scss
++++ b/app/styles/index.scss
+@@ -8,3 +8,4 @@ $charset: "UTF-8";
+ @import "../configuration/styles/index.scss";
+ @import "../users/styles/index.scss";
+ @import "../redfish/styles/index.scss";
++@import "../kvm/styles/index.scss";
+diff --git a/package.json b/package.json
+index c4ed8e5..2b1d394 100644
+--- a/package.json
++++ b/package.json
+@@ -73,7 +73,8 @@
+     "uglifyjs-webpack-plugin": "^1.3.0",
+     "webpack": "^4.17.2",
+     "webpack-cli": "^3.1.0",
+-    "webpack-dev-server": "^3.1.7"
++    "webpack-dev-server": "^3.1.7",
++    "@novnc/novnc": "^1.0.0"
+   },
+   "license": "MIT",
+   "engines": {
+-- 
+2.17.1
+
