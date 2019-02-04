@@ -1,0 +1,7 @@
+Code-Review+2: Brad Bishop <bradleyb@fuzziesquirrel.com>
+Verified+1: Brad Bishop <bradleyb@fuzziesquirrel.com>
+Submitted-by: Brad Bishop <bradleyb@fuzziesquirrel.com>
+Submitted-at: Mon, 04 Feb 2019 13:35:58 +0000
+Reviewed-on: https://gerrit.openbmc-project.xyz/17739
+Project: openbmc/meta-quanta
+Branch: refs/heads/master
