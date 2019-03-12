@@ -1,0 +1,8 @@
+Code-Review+1: Emily Shaffer <emilyshaffer@google.com>
+Code-Review+2: Brad Bishop <bradleyb@fuzziesquirrel.com>
+Verified+1: Brad Bishop <bradleyb@fuzziesquirrel.com>
+Submitted-by: Brad Bishop <bradleyb@fuzziesquirrel.com>
+Submitted-at: Tue, 12 Mar 2019 02:38:10 +0000
+Reviewed-on: https://gerrit.openbmc-project.xyz/18616
+Project: openbmc/meta-quanta
+Branch: refs/heads/master
