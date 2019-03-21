@@ -1,0 +1,11 @@
+[Unit]
+Description = configure GPIO for SSD Power Control
+Wants=org.openbmc.records.events.service
+After=org.openbmc.records.events.service
+
+[Service]
+Restart=always
+ExecStart=/usr/sbin/init_once.sh
+
+[Install]
+WantedBy=obmc-standby.target
