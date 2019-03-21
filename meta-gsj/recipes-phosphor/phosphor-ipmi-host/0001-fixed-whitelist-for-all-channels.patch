@@ -1,0 +1,13 @@
+diff --git a/whitelist-filter.cpp b/whitelist-filter.cpp
+index 3b45db8..ba9824d 100644
+--- a/whitelist-filter.cpp
++++ b/whitelist-filter.cpp
+@@ -148,7 +148,7 @@ void WhitelistFilter::postInit()
+ 
+ ipmi::Cc WhitelistFilter::filterMessage(ipmi::message::Request::ptr request)
+ {
+-    if (request->ctx->channel == ipmi::channelSystemIface && restrictedMode)
++    if (restrictedMode)
+     {
+         if (!std::binary_search(
+                 whitelist.cbegin(), whitelist.cend(),
