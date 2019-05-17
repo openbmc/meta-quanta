@@ -1,3 +1,4 @@
+
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
 # Replace the default whitelist for GSJ board.
