@@ -1,0 +1,14 @@
+[Unit]
+Description=Phosphor-Pid-Control Fan Control Daemon
+After=xyz.openbmc_project.nvme.manager.service
+
+[Service]
+Restart=always
+ExecStart={bindir}/fan-control.sh
+RestartSec=5
+StartLimitInterval=0
+Type=simple
+ExecStopPost={bindir}/fan-no-sensor-protect.sh
+
+[Install]
+WantedBy=basic.target
