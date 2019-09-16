@@ -1,5 +1,1 @@
-FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
-
-UBRANCH = "runbmc_mdio"
-SRC_URI = "git://github.com/Nuvoton-Israel/u-boot.git;branch=${UBRANCH}"
-SRCREV = "${AUTOREV}"
+SRCREV = "053010cb581266c6be675b9ae4ca7bf0583e8538"
