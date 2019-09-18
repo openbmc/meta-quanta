@@ -1,0 +1,280 @@
+{
+    "sensors" : [
+        {
+            "name": "fan1",
+            "type": "fan",
+            "readPath": "/xyz/openbmc_project/sensors/fan_tach/fan1",
+            "writePath": "/sys/devices/platform/ahb/ahb:apb/f0103000.pwm-fan-controller/hwmon/**/pwm1",
+            "min": 0,
+            "max": 255
+        },
+        {
+            "name": "p0_dimm_vr0_temp",
+            "type": "temp",
+            "readPath": "/xyz/openbmc_project/sensors/temperature/p0_dimm_vr0_temp",
+            "writePath": "",
+            "min": 0,
+            "max": 0,
+            "timeout": 0
+        },
+        {
+            "name": "p0_dimm_vr1_temp",
+            "type": "temp",
+            "readPath": "/xyz/openbmc_project/sensors/temperature/p0_dimm_vr1_temp",
+            "writePath": "",
+            "min": 0,
+            "max": 0,
+            "timeout": 0
+        },
+        {
+            "name": "p0_vccin_vr_temp",
+            "type": "temp",
+            "readPath": "/xyz/openbmc_project/sensors/temperature/p0_vccin_vr_temp",
+            "writePath": "",
+            "min": 0,
+            "max": 0,
+            "timeout": 0
+        },
+        {
+            "name": "p0_vccio_vr_temp",
+            "type": "temp",
+            "readPath": "/xyz/openbmc_project/sensors/temperature/p0_vccio_vr_temp",
+            "writePath": "",
+            "min": 0,
+            "max": 0,
+            "timeout": 0
+        },
+        {
+            "name": "p1_dimm_vr0_temp",
+            "type": "temp",
+            "readPath": "/xyz/openbmc_project/sensors/temperature/p1_dimm_vr0_temp",
+            "writePath": "",
+            "min": 0,
+            "max": 0,
+            "timeout": 0
+        },
+        {
+            "name": "p1_dimm_vr1_temp",
+            "type": "temp",
+            "readPath": "/xyz/openbmc_project/sensors/temperature/p1_dimm_vr1_temp",
+            "writePath": "",
+            "min": 0,
+            "max": 0,
+            "timeout": 0
+        },
+        {
+            "name": "p1_vccin_vr_temp",
+            "type": "temp",
+            "readPath": "/xyz/openbmc_project/sensors/temperature/p1_vccin_vr_temp",
+            "writePath": "",
+            "min": 0,
+            "max": 0,
+            "timeout": 0
+        },
+        {
+            "name": "p1_vccio_vr_temp",
+            "type": "temp",
+            "readPath": "/xyz/openbmc_project/sensors/temperature/p1_vccio_vr_temp",
+            "writePath": "",
+            "min": 0,
+            "max": 0,
+            "timeout": 0
+        }
+    ],
+    "zones" : [
+        {
+            "id": 0,
+            "minThermalOutput": 0.0,
+            "failsafePercent": 100.0,
+            "pids": [
+                {
+                    "name": "fan1",
+                    "type": "fan",
+                    "inputs": ["fan1"],
+                    "setpoint": 40.0,
+                    "pid": {
+                        "samplePeriod": 1.0,
+                        "proportionalCoeff": 0.0,
+                        "integralCoeff": 0.0,
+                        "feedFwdOffsetCoeff": 0.0,
+                        "feedFwdGainCoeff": 1.0,
+                        "integralLimit_min": 0.0,
+                        "integralLimit_max": 0.0,
+                        "outLim_min": 3.0,
+                        "outLim_max": 100.0,
+                        "slewNeg": 0.0,
+                        "slewPos": 0.0
+                    }
+                },
+                {
+                    "name": "p0_dimm_vr0_temp",
+                    "type": "temp",
+                    "inputs": ["p0_dimm_vr0_temp"],
+                    "setpoint": 40.0,
+                    "pid": {
+                        "samplePeriod": 1.0,
+                        "proportionalCoeff": -20.0,
+                        "integralCoeff": -0.1,
+                        "feedFwdOffsetCoeff": 0.0,
+                        "feedFwdGainCoeff": 0.0,
+                        "integralLimit_min": 0.0,
+                        "integralLimit_max": 0.0,
+                        "outLim_min": 0.0,
+                        "outLim_max": 16000.0,
+                        "slewNeg": 0.0,
+                        "slewPos": 0.0,
+                        "positiveHysteresis": 1.0,
+                        "negativeHysteresis": 1.0
+                    }
+                },
+                {
+                    "name": "p0_dimm_vr1_temp",
+                    "type": "temp",
+                    "inputs": ["p0_dimm_vr1_temp"],
+                    "setpoint": 40.0,
+                    "pid": {
+                        "samplePeriod": 1.0,
+                        "proportionalCoeff": -20.0,
+                        "integralCoeff": -0.1,
+                        "feedFwdOffsetCoeff": 0.0,
+                        "feedFwdGainCoeff": 0.0,
+                        "integralLimit_min": 0.0,
+                        "integralLimit_max": 0.0,
+                        "outLim_min": 0.0,
+                        "outLim_max": 16000.0,
+                        "slewNeg": 0.0,
+                        "slewPos": 0.0,
+                        "positiveHysteresis": 1.0,
+                        "negativeHysteresis": 1.0
+                    }
+                },
+                {
+                    "name": "p0_vccin_vr_temp",
+                    "type": "temp",
+                    "inputs": ["p0_vccin_vr_temp"],
+                    "setpoint": 40.0,
+                    "pid": {
+                        "samplePeriod": 1.0,
+                        "proportionalCoeff": -20.0,
+                        "integralCoeff": -0.1,
+                        "feedFwdOffsetCoeff": 0.0,
+                        "feedFwdGainCoeff": 0.0,
+                        "integralLimit_min": 0.0,
+                        "integralLimit_max": 0.0,
+                        "outLim_min": 0.0,
+                        "outLim_max": 16000.0,
+                        "slewNeg": 0.0,
+                        "slewPos": 0.0,
+                        "positiveHysteresis": 1.0,
+                        "negativeHysteresis": 1.0
+                    }
+                },
+                {
+                    "name": "p0_vccio_vr_temp",
+                    "type": "temp",
+                    "inputs": ["p0_vccio_vr_temp"],
+                    "setpoint": 40.0,
+                    "pid": {
+                        "samplePeriod": 1.0,
+                        "proportionalCoeff": -20.0,
+                        "integralCoeff": -0.1,
+                        "feedFwdOffsetCoeff": 0.0,
+                        "feedFwdGainCoeff": 0.0,
+                        "integralLimit_min": 0.0,
+                        "integralLimit_max": 0.0,
+                        "outLim_min": 0.0,
+                        "outLim_max": 16000.0,
+                        "slewNeg": 0.0,
+                        "slewPos": 0.0,
+                        "positiveHysteresis": 1.0,
+                        "negativeHysteresis": 1.0
+                    }
+                },
+                {
+                    "name": "p1_dimm_vr0_temp",
+                    "type": "temp",
+                    "inputs": ["p1_dimm_vr0_temp"],
+                    "setpoint": 40.0,
+                    "pid": {
+                        "samplePeriod": 1.0,
+                        "proportionalCoeff": -20.0,
+                        "integralCoeff": -0.1,
+                        "feedFwdOffsetCoeff": 0.0,
+                        "feedFwdGainCoeff": 0.0,
+                        "integralLimit_min": 0.0,
+                        "integralLimit_max": 0.0,
+                        "outLim_min": 0.0,
+                        "outLim_max": 16000.0,
+                        "slewNeg": 0.0,
+                        "slewPos": 0.0,
+                        "positiveHysteresis": 1.0,
+                        "negativeHysteresis": 1.0
+                    }
+                },
+                {
+                    "name": "p1_dimm_vr1_temp",
+                    "type": "temp",
+                    "inputs": ["p1_dimm_vr1_temp"],
+                    "setpoint": 40.0,
+                    "pid": {
+                        "samplePeriod": 1.0,
+                        "proportionalCoeff": -20.0,
+                        "integralCoeff": -0.1,
+                        "feedFwdOffsetCoeff": 0.0,
+                        "feedFwdGainCoeff": 0.0,
+                        "integralLimit_min": 0.0,
+                        "integralLimit_max": 0.0,
+                        "outLim_min": 0.0,
+                        "outLim_max": 16000.0,
+                        "slewNeg": 0.0,
+                        "slewPos": 0.0,
+                        "positiveHysteresis": 1.0,
+                        "negativeHysteresis": 1.0
+                    }
+                },
+                {
+                    "name": "p1_vccin_vr_temp",
+                    "type": "temp",
+                    "inputs": ["p1_vccin_vr_temp"],
+                    "setpoint": 40.0,
+                    "pid": {
+                        "samplePeriod": 1.0,
+                        "proportionalCoeff": -20.0,
+                        "integralCoeff": -0.1,
+                        "feedFwdOffsetCoeff": 0.0,
+                        "feedFwdGainCoeff": 0.0,
+                        "integralLimit_min": 0.0,
+                        "integralLimit_max": 0.0,
+                        "outLim_min": 0.0,
+                        "outLim_max": 16000.0,
+                        "slewNeg": 0.0,
+                        "slewPos": 0.0,
+                        "positiveHysteresis": 1.0,
+                        "negativeHysteresis": 1.0
+                    }
+                },
+                {
+                    "name": "p1_vccio_vr_temp",
+                    "type": "temp",
+                    "inputs": ["p1_vccio_vr_temp"],
+                    "setpoint": 40.0,
+                    "pid": {
+                        "samplePeriod": 1.0,
+                        "proportionalCoeff": -20.0,
+                        "integralCoeff": -0.1,
+                        "feedFwdOffsetCoeff": 0.0,
+                        "feedFwdGainCoeff": 0.0,
+                        "integralLimit_min": 0.0,
+                        "integralLimit_max": 0.0,
+                        "outLim_min": 0.0,
+                        "outLim_max": 16000.0,
+                        "slewNeg": 0.0,
+                        "slewPos": 0.0,
+                        "positiveHysteresis": 1.0,
+                        "negativeHysteresis": 1.0
+                    }
+                }
+            ]
+        }
+    ]
+}
