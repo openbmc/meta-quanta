@@ -1,0 +1,10 @@
+Ok-To-Test+1: Jenkins <openbmc-ci-admin@ozlabs.org>
+Code-Review+1: Fran Hsu <fran.hsu@quantatw.com>
+Verified+1: Jenkins <openbmc-ci-admin@ozlabs.org>
+Code-Review+1: Benjamin Fair <benjaminfair@google.com>
+Code-Review+2: Brad Bishop <radsquirrel@gmail.com>
+Submitted-by: Brad Bishop <radsquirrel@gmail.com>
+Submitted-at: Mon, 23 Sep 2019 13:35:18 +0000
+Reviewed-on: https://gerrit.openbmc-project.xyz/c/openbmc/meta-quanta/+/25405
+Project: openbmc/meta-quanta
+Branch: refs/heads/master
