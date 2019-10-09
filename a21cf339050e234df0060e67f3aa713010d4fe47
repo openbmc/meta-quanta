@@ -1,0 +1,10 @@
+Code-Review+1: Patrick Venture <venture@google.com>
+Code-Review+1: Fran Hsu <fran.hsu@quantatw.com>
+Code-Review+1: Benjamin Fair <benjaminfair@google.com>
+Code-Review+2: Brad Bishop <radsquirrel@gmail.com>
+Verified+1: Brad Bishop <radsquirrel@gmail.com>
+Submitted-by: Brad Bishop <radsquirrel@gmail.com>
+Submitted-at: Wed, 09 Oct 2019 13:59:18 +0000
+Reviewed-on: https://gerrit.openbmc-project.xyz/c/openbmc/meta-quanta/+/25215
+Project: openbmc/meta-quanta
+Branch: refs/heads/master
