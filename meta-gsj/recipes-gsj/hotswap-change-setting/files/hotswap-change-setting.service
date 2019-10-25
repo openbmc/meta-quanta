@@ -1,0 +1,14 @@
+[Unit]
+Description=Hotswap Controller Setting Changing
+Before=xyz.openbmc_project.Hwmon@.service
+
+[Service]
+ExecStart=/usr/bin/hotswap-change-setting.sh
+Restart=no
+Type=oneshot
+RemainAfterExit=true
+StandardOutput=tty
+StandardError=tty
+
+[Install]
+WantedBy=multi-user.target
