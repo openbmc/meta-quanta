@@ -1,0 +1,10 @@
+[Unit]
+Description=Adjust KL0 Value Manager
+
+[Service]
+ExecStart=/usr/bin/adjust-kl0-value.sh
+Restart=always
+StandardOutput=syslog
+
+[Install]
+WantedBy=multi-user.target
