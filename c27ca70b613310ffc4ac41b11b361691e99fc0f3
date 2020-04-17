@@ -1,0 +1,10 @@
+Ok-To-Test+1: Jenkins <openbmc-ci-admin@ozlabs.org>
+Verified+1: Jenkins <openbmc-ci-admin@ozlabs.org>
+Code-Review+1: Andrew Geissler <geissonator@yahoo.com>
+Code-Review+1: Samuel Jiang <Samuel.Jiang@quantatw.com>
+Code-Review+2: Benjamin Fair <benjaminfair@google.com>
+Submitted-by: Benjamin Fair <benjaminfair@google.com>
+Submitted-at: Fri, 17 Apr 2020 16:49:34 +0000
+Reviewed-on: https://gerrit.openbmc-project.xyz/c/openbmc/meta-quanta/+/31321
+Project: openbmc/meta-quanta
+Branch: refs/heads/master
