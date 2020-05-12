@@ -1,0 +1,16 @@
+[Unit]
+Description=phosphor ECC dbus
+Requires=phosphor-dbus-monitor.service
+After=phosphor-dbus-monitor.service
+Requires=obmc-fru-fault-monitor.service
+After=obmc-fru-fault-monitor.service
+
+[Service]
+Restart=no
+ExecStart=/usr/bin/ecc_main
+SyslogIdentifier=phosphor-ecc
+Type=dbus
+BusName=xyz.openbmc_project.memory.ECC
+
+[Install]
+WantedBy=multi-user.target
