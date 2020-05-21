@@ -1,0 +1,6 @@
+DEPENDS += "bison-native bc-native"
+LIC_FILES_CHKSUM = "file://Licenses/README;md5=30503fd321432fc713238f582193b78e"
+UBRANCH = "npcm7xx-v2019.01"
+SRC_URI = "git://github.com/Nuvoton-Israel/u-boot.git;branch=${UBRANCH}"
+SRCREV = "b908e8aa70677a5d886d96e4a9ba32af8da6d041"
+UBOOT_MAKE_TARGET_append_gbs = " DEVICE_TREE=${UBOOT_DEVICETREE}"
