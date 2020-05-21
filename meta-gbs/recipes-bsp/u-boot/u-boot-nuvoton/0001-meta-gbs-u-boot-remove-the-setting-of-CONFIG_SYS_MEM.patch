@@ -1,0 +1,30 @@
+From bf834d5c952fad55e7fdb27893cdd2fa8dd4811c Mon Sep 17 00:00:00 2001
+From: Fran Hsu <Fran.Hsu@quantatw.com>
+Date: Fri, 29 Nov 2019 15:29:11 +0800
+Subject: [PATCH] meta-gbs: u-boot: remove the setting of
+ CONFIG_SYS_MEM_TOP_HIDE.
+
+The NPCM730 doesn't have VGA, so that we could remove the setting
+of CONFIG_SYS_MEM_TOP_HIDE from uboot.
+
+Signed-off-by: Fran Hsu <Fran.Hsu@quantatw.com>
+---
+ include/configs/poleg.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/include/configs/poleg.h b/include/configs/poleg.h
+index 36855b056e..bfb8b5c6a8 100644
+--- a/include/configs/poleg.h
++++ b/include/configs/poleg.h
+@@ -62,7 +62,7 @@
+ #define SPI3_END_ADDR					0xBFFFFFFF
+ 
+ /* 16MB Graphics Memory size to hide + 32MB for VCD ECE DVC. */
+-#define CONFIG_SYS_MEM_TOP_HIDE   ((16 << 20) + (32 << 20))
++#define CONFIG_SYS_MEM_TOP_HIDE   		0
+ #define PHYS_SDRAM_1			        CONFIG_SYS_SDRAM_BASE
+ 
+ #define CONFIG_BAUDRATE                 115200
+-- 
+2.24.0
+
