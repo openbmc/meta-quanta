@@ -1,0 +1,137 @@
+0x00:
+  /system/chassis/motherboard:
+    entityID: 7
+    entityInstance: 0x00
+    interfaces:
+      xyz.openbmc_project.Inventory.Item:
+        PrettyName:
+          IPMIFruProperty: Name
+          IPMIFruSection: Board
+      xyz.openbmc_project.Inventory.Decorator.Asset:
+        BuildDate:
+          IPMIFruProperty: Mfg Date
+          IPMIFruSection: Board
+        Manufacturer:
+          IPMIFruProperty: Manufacturer
+          IPMIFruSection: Board
+        SerialNumber:
+          IPMIFruProperty: Serial Number
+          IPMIFruSection: Board
+        PartNumber:
+          IPMIFruProperty: Part Number
+          IPMIFruSection: Board
+      xyz.openbmc_project.Inventory.Decorator.Revision:
+        Version:
+          IPMIFruProperty: FRU File ID
+          IPMIFruSection: Board
+      xyz.openbmc_project.Inventory.Item.Board.Motherboard:
+
+0x01:
+  /system/chassis/hsbp:
+    entityID: 7
+    entityInstance: 0x01
+    interfaces:
+      xyz.openbmc_project.Inventory.Decorator.Asset:
+        BuildDate:
+          IPMIFruProperty: Mfg Date
+          IPMIFruSection: Board
+        SerialNumber:
+          IPMIFruProperty: Serial Number
+          IPMIFruSection: Board
+        PartNumber:
+          IPMIFruProperty: Part Number
+          IPMIFruSection: Board
+        Manufacturer:
+          IPMIFruProperty: Manufacturer
+          IPMIFruSection: Board
+      xyz.openbmc_project.Inventory.Item:
+        PrettyName:
+          IPMIFruProperty: Name
+          IPMIFruSection: Board
+      xyz.openbmc_project.Inventory.Decorator.Revision:
+        Version:
+          IPMIFruProperty: FRU File ID
+          IPMIFruSection: Board
+
+0x02:
+  /system/chassis/fan:
+    entityID: 7
+    entityInstance: 0x02
+    interfaces:
+      xyz.openbmc_project.Inventory.Decorator.Asset:
+        BuildDate:
+          IPMIFruProperty: Mfg Date
+          IPMIFruSection: Board
+        SerialNumber:
+          IPMIFruProperty: Serial Number
+          IPMIFruSection: Board
+        PartNumber:
+          IPMIFruProperty: Part Number
+          IPMIFruSection: Board
+        Manufacturer:
+          IPMIFruProperty: Manufacturer
+          IPMIFruSection: Board
+      xyz.openbmc_project.Inventory.Item:
+        PrettyName:
+          IPMIFruProperty: Name
+          IPMIFruSection: Board
+      xyz.openbmc_project.Inventory.Decorator.Revision:
+        Version:
+          IPMIFruProperty: FRU File ID
+          IPMIFruSection: Board
+
+0x03:
+  /system/chassis/PE0: &ADD_IN_CARD_BOARD_DEFAULTS
+    entityID: 11
+    entityInstance: 0x00
+    interfaces:
+      xyz.openbmc_project.Inventory.Decorator.Asset:
+        BuildDate:
+          IPMIFruProperty: Mfg Date
+          IPMIFruSection: Board
+        SerialNumber:
+          IPMIFruProperty: Serial Number
+          IPMIFruSection: Board
+        PartNumber:
+          IPMIFruProperty: Part Number
+          IPMIFruSection: Board
+        Manufacturer:
+          IPMIFruProperty: Manufacturer
+          IPMIFruSection: Board
+      xyz.openbmc_project.Inventory.Item:
+        PrettyName:
+          IPMIFruProperty: Name
+          IPMIFruSection: Board
+      xyz.openbmc_project.Inventory.Decorator.Revision:
+        Version:
+          IPMIFruProperty: FRU File ID
+          IPMIFruSection: Board
+  /system/chassis/PE0/PE0: &ADD_IN_CARD_PRODUCT_DEFAULTS
+    entityID: 11
+    entityInstance: 0x00
+    interfaces:
+      xyz.openbmc_project.Inventory.Decorator.Asset:
+        BuildDate:
+          IPMIFruProperty: Mfg Date
+          IPMIFruSection: Product
+        SerialNumber:
+          IPMIFruProperty: Serial Number
+          IPMIFruSection: Product
+        Model:
+          IPMIFruProperty: Model Number
+          IPMIFruSection: Product
+        Manufacturer:
+          IPMIFruProperty: Manufacturer
+          IPMIFruSection: Product
+      xyz.openbmc_project.Inventory.Item:
+        PrettyName:
+          IPMIFruProperty: Name
+          IPMIFruSection: Product
+
+0x04:
+  /system/chassis/PE1:
+    entityInstance: 0x01
+    <<: *ADD_IN_CARD_BOARD_DEFAULTS
+  /system/chassis/PE1/PE1:
+    entityInstance: 0x01
+    <<: *ADD_IN_CARD_PRODUCT_DEFAULTS
