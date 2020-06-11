@@ -1,0 +1,10 @@
+Ok-To-Test+1: Jenkins <openbmc-ci-admin@ozlabs.org>
+Code-Review+1: Tyrone Ting <kfting@nuvoton.com>
+Verified+1: Jenkins <openbmc-ci-admin@ozlabs.org>
+Code-Review+2: Benjamin Fair <benjaminfair@google.com>
+Code-Review+1: Joseph Liu <kwliu@nuvoton.com>
+Submitted-by: Benjamin Fair <benjaminfair@google.com>
+Submitted-at: Thu, 11 Jun 2020 17:23:42 +0000
+Reviewed-on: https://gerrit.openbmc-project.xyz/c/openbmc/meta-quanta/+/31890
+Project: openbmc/meta-quanta
+Branch: refs/heads/master
