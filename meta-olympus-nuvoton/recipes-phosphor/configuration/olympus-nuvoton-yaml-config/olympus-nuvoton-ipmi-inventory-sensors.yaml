@@ -1,0 +1,346 @@
+/xyz/openbmc_project/inventory/system:
+  sensorID: 0
+  sensorType: 0x12
+  eventReadingType: 0x6F
+  offset: 0x02
+/xyz/openbmc_project/sensors/temperature/bmc_card/critical_high:
+  sensorID: 1
+  sensorType: 0x01
+  eventReadingType: 0x01
+  offset: 0x09
+/xyz/openbmc_project/sensors/temperature/bmc_card/critical_low:
+  sensorID: 1
+  sensorType: 0x01
+  eventReadingType: 0x01
+  offset: 0x02
+/xyz/openbmc_project/sensors/temperature/bmc_card/warning_high:
+  sensorID: 1
+  sensorType: 0x01
+  eventReadingType: 0x01
+  offset: 0x01
+/xyz/openbmc_project/sensors/temperature/bmc_card/warning_low:
+  sensorID: 1
+  sensorType: 0x01
+  eventReadingType: 0x01
+  offset: 0x00
+/xyz/openbmc_project/sensors/temperature/inlet/critical_high:
+  sensorID: 2
+  sensorType: 0x01
+  eventReadingType: 0x01
+  offset: 0x09
+/xyz/openbmc_project/sensors/temperature/inlet/critical_low:
+  sensorID: 2
+  sensorType: 0x01
+  eventReadingType: 0x01
+  offset: 0x02
+/xyz/openbmc_project/sensors/temperature/inlet/warning_high:
+  sensorID: 2
+  sensorType: 0x01
+  eventReadingType: 0x01
+  offset: 0x01
+/xyz/openbmc_project/sensors/temperature/inlet/warning_low:
+  sensorID: 2
+  sensorType: 0x01
+  eventReadingType: 0x01
+  offset: 0x00
+/xyz/openbmc_project/sensors/temperature/outlet/critical_high:
+  sensorID: 3
+  sensorType: 0x01
+  eventReadingType: 0x01
+  offset: 0x09
+/xyz/openbmc_project/sensors/temperature/outlet/critical_low:
+  sensorID: 3
+  sensorType: 0x01
+  eventReadingType: 0x01
+  offset: 0x02
+/xyz/openbmc_project/sensors/temperature/outlet/warning_high:
+  sensorID: 3
+  sensorType: 0x01
+  eventReadingType: 0x01
+  offset: 0x01
+/xyz/openbmc_project/sensors/temperature/outlet/warning_low:
+  sensorID: 3
+  sensorType: 0x01
+  eventReadingType: 0x01
+  offset: 0x00
+/xyz/openbmc_project/sensors/temperature/Core_0_CPU0/critical_high:
+  sensorID: 76
+  sensorType: 0x01
+  eventReadingType: 0x01
+  offset: 0x09
+/xyz/openbmc_project/sensors/temperature/Core_0_CPU0/warning_high:
+  sensorID: 76
+  sensorType: 0x01
+  eventReadingType: 0x01
+  offset: 0x01
+/xyz/openbmc_project/sensors/temperature/Core_1_CPU0/critical_high:
+  sensorID: 77
+  sensorType: 0x01
+  eventReadingType: 0x01
+  offset: 0x09
+/xyz/openbmc_project/sensors/temperature/Core_1_CPU0/warning_high:
+  sensorID: 77
+  sensorType: 0x01
+  eventReadingType: 0x01
+  offset: 0x01
+/xyz/openbmc_project/sensors/temperature/Core_2_CPU0/critical_high:
+  sensorID: 78
+  sensorType: 0x01
+  eventReadingType: 0x01
+  offset: 0x09
+/xyz/openbmc_project/sensors/temperature/Core_2_CPU0/warning_high:
+  sensorID: 78
+  sensorType: 0x01
+  eventReadingType: 0x01
+  offset: 0x01
+/xyz/openbmc_project/sensors/temperature/Core_3_CPU0/critical_high:
+  sensorID: 79
+  sensorType: 0x01
+  eventReadingType: 0x01
+  offset: 0x09
+/xyz/openbmc_project/sensors/temperature/Core_3_CPU0/warning_high:
+  sensorID: 79
+  sensorType: 0x01
+  eventReadingType: 0x01
+  offset: 0x01
+/xyz/openbmc_project/sensors/temperature/Core_4_CPU0/critical_high:
+  sensorID: 80
+  sensorType: 0x01
+  eventReadingType: 0x01
+  offset: 0x09
+/xyz/openbmc_project/sensors/temperature/Core_4_CPU0/warning_high:
+  sensorID: 80
+  sensorType: 0x01
+  eventReadingType: 0x01
+  offset: 0x01
+/xyz/openbmc_project/sensors/temperature/Core_5_CPU0/critical_high:
+  sensorID: 81
+  sensorType: 0x01
+  eventReadingType: 0x01
+  offset: 0x09
+/xyz/openbmc_project/sensors/temperature/Core_5_CPU0/warning_high:
+  sensorID: 81
+  sensorType: 0x01
+  eventReadingType: 0x01
+  offset: 0x01
+/xyz/openbmc_project/sensors/temperature/Core_0_CPU1/critical_high:
+  sensorID: 82
+  sensorType: 0x01
+  eventReadingType: 0x01
+  offset: 0x09
+/xyz/openbmc_project/sensors/temperature/Core_0_CPU1/warning_high:
+  sensorID: 82
+  sensorType: 0x01
+  eventReadingType: 0x01
+  offset: 0x01
+/xyz/openbmc_project/sensors/temperature/Core_1_CPU1/critical_high:
+  sensorID: 83
+  sensorType: 0x01
+  eventReadingType: 0x01
+  offset: 0x09
+/xyz/openbmc_project/sensors/temperature/Core_1_CPU1/warning_high:
+  sensorID: 83
+  sensorType: 0x01
+  eventReadingType: 0x01
+  offset: 0x01
+/xyz/openbmc_project/sensors/temperature/Core_2_CPU1/critical_high:
+  sensorID: 84
+  sensorType: 0x01
+  eventReadingType: 0x01
+  offset: 0x09
+/xyz/openbmc_project/sensors/temperature/Core_2_CPU1/warning_high:
+  sensorID: 84
+  sensorType: 0x01
+  eventReadingType: 0x01
+  offset: 0x01
+/xyz/openbmc_project/sensors/temperature/Core_3_CPU1/critical_high:
+  sensorID: 85
+  sensorType: 0x01
+  eventReadingType: 0x01
+  offset: 0x09
+/xyz/openbmc_project/sensors/temperature/Core_3_CPU1/warning_high:
+  sensorID: 85
+  sensorType: 0x01
+  eventReadingType: 0x01
+  offset: 0x01
+/xyz/openbmc_project/sensors/temperature/Core_4_CPU1/critical_high:
+  sensorID: 86
+  sensorType: 0x01
+  eventReadingType: 0x01
+  offset: 0x09
+/xyz/openbmc_project/sensors/temperature/Core_4_CPU1/warning_high:
+  sensorID: 86
+  sensorType: 0x01
+  eventReadingType: 0x01
+  offset: 0x01
+/xyz/openbmc_project/sensors/temperature/Core_5_CPU1/critical_high:
+  sensorID: 87
+  sensorType: 0x01
+  eventReadingType: 0x01
+  offset: 0x09
+/xyz/openbmc_project/sensors/temperature/Core_5_CPU1/warning_high:
+  sensorID: 87
+  sensorType: 0x01
+  eventReadingType: 0x01
+  offset: 0x01
+/xyz/openbmc_project/sensors/voltage/P12V_STBY/critical_high:
+  sensorID: 68
+  sensorType: 0x02
+  eventReadingType: 0x01
+  offset: 0x09
+/xyz/openbmc_project/sensors/voltage/P12V_STBY/critical_low:
+  sensorID: 68
+  sensorType: 0x02
+  eventReadingType: 0x01
+  offset: 0x02
+/xyz/openbmc_project/sensors/voltage/P12V_STBY/warning_high:
+  sensorID: 68
+  sensorType: 0x02
+  eventReadingType: 0x01
+  offset: 0x01
+/xyz/openbmc_project/sensors/voltage/P12V_STBY/warning_low:
+  sensorID: 68
+  sensorType: 0x02
+  eventReadingType: 0x01
+  offset: 0x00
+/xyz/openbmc_project/sensors/voltage/P1V05_STBY_PCH/critical_high:
+  sensorID: 69
+  sensorType: 0x02
+  eventReadingType: 0x01
+  offset: 0x09
+/xyz/openbmc_project/sensors/voltage/P1V05_STBY_PCH/critical_low:
+  sensorID: 69
+  sensorType: 0x02
+  eventReadingType: 0x01
+  offset: 0x02
+/xyz/openbmc_project/sensors/voltage/P1V05_STBY_PCH/warning_high:
+  sensorID: 69
+  sensorType: 0x02
+  eventReadingType: 0x01
+  offset: 0x01
+/xyz/openbmc_project/sensors/voltage/P1V05_STBY_PCH/warning_low:
+  sensorID: 69
+  sensorType: 0x02
+  eventReadingType: 0x01
+  offset: 0x00
+  offset: 0x00
+/xyz/openbmc_project/sensors/voltage/P3V3/critical_high:
+  sensorID: 70
+  sensorType: 0x02
+  eventReadingType: 0x01
+  offset: 0x09
+/xyz/openbmc_project/sensors/voltage/P3V3/critical_low:
+  sensorID: 70
+  sensorType: 0x02
+  eventReadingType: 0x01
+  offset: 0x02
+/xyz/openbmc_project/sensors/voltage/P3V3/warning_high:
+  sensorID: 70
+  sensorType: 0x02
+  eventReadingType: 0x01
+  offset: 0x01
+/xyz/openbmc_project/sensors/voltage/P3V3/warning_low:
+  sensorID: 70
+  sensorType: 0x02
+  eventReadingType: 0x01
+  offset: 0x00
+/xyz/openbmc_project/sensors/voltage/P3V3_STBY/critical_high:
+  sensorID: 71
+  sensorType: 0x02
+  eventReadingType: 0x01
+  offset: 0x09
+/xyz/openbmc_project/sensors/voltage/P3V3_STBY/critical_low:
+  sensorID: 71
+  sensorType: 0x02
+  eventReadingType: 0x01
+  offset: 0x02
+/xyz/openbmc_project/sensors/voltage/P3V3_STBY/warning_high:
+  sensorID: 71
+  sensorType: 0x02
+  eventReadingType: 0x01
+  offset: 0x01
+/xyz/openbmc_project/sensors/voltage/P3V3_STBY/warning_low:
+  sensorID: 71
+  sensorType: 0x02
+  eventReadingType: 0x01
+  offset: 0x00
+/xyz/openbmc_project/sensors/voltage/P3V_BAT/critical_high:
+  sensorID: 72
+  sensorType: 0x02
+  eventReadingType: 0x01
+  offset: 0x09
+/xyz/openbmc_project/sensors/voltage/P3V_BAT/critical_low:
+  sensorID: 72
+  sensorType: 0x02
+  eventReadingType: 0x01
+  offset: 0x02
+/xyz/openbmc_project/sensors/voltage/P3V_BAT/warning_high:
+  sensorID: 72
+  sensorType: 0x02
+  eventReadingType: 0x01
+  offset: 0x01
+/xyz/openbmc_project/sensors/voltage/P3V_BAT/warning_low:
+  sensorID: 72
+  sensorType: 0x02
+  eventReadingType: 0x01
+  offset: 0x00
+/xyz/openbmc_project/sensors/voltage/P5V/critical_high:
+  sensorID: 73
+  sensorType: 0x02
+  eventReadingType: 0x01
+  offset: 0x09
+/xyz/openbmc_project/sensors/voltage/P5V/critical_low:
+  sensorID: 73
+  sensorType: 0x02
+  eventReadingType: 0x01
+  offset: 0x02
+/xyz/openbmc_project/sensors/voltage/P5V/warning_high:
+  sensorID: 73
+  sensorType: 0x02
+  eventReadingType: 0x01
+  offset: 0x01
+/xyz/openbmc_project/sensors/voltage/P5V/warning_low:
+  sensorID: 73
+  sensorType: 0x02
+  eventReadingType: 0x01
+  offset: 0x00
+/xyz/openbmc_project/sensors/voltage/P5V_STBY/critical_high:
+  sensorID: 74
+  sensorType: 0x02
+  eventReadingType: 0x01
+  offset: 0x09
+/xyz/openbmc_project/sensors/voltage/P5V_STBY/critical_low:
+  sensorID: 74
+  sensorType: 0x02
+  eventReadingType: 0x01
+  offset: 0x02
+/xyz/openbmc_project/sensors/voltage/P5V_STBY/warning_high:
+  sensorID: 74
+  sensorType: 0x02
+  eventReadingType: 0x01
+  offset: 0x01
+/xyz/openbmc_project/sensors/voltage/P5V_STBY/warning_low:
+  sensorID: 74
+  sensorType: 0x02
+  eventReadingType: 0x01
+  offset: 0x00
+/xyz/openbmc_project/sensors/voltage/PVNN_STBY_PCH/critical_high:
+  sensorID: 75
+  sensorType: 0x02
+  eventReadingType: 0x01
+  offset: 0x09
+/xyz/openbmc_project/sensors/voltage/PVNN_STBY_PCH/critical_low:
+  sensorID: 75
+  sensorType: 0x02
+  eventReadingType: 0x01
+  offset: 0x02
+/xyz/openbmc_project/sensors/voltage/PVNN_STBY_PCH/warning_high:
+  sensorID: 75
+  sensorType: 0x02
+  eventReadingType: 0x01
+  offset: 0x01
+/xyz/openbmc_project/sensors/voltage/PVNN_STBY_PCH/warning_low:
+  sensorID: 75
+  sensorType: 0x02
+  eventReadingType: 0x01
+  offset: 0x00
