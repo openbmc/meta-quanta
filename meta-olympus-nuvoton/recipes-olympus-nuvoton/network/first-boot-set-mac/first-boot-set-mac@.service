@@ -1,0 +1,20 @@
+[Unit]
+Description=Init BMC MAC address for NIC %I
+ConditionPathExists=!/var/lib/first-boot-set-mac/%i
+Wants=mapper-wait@-xyz-openbmc_project-inventory.service
+After=mapper-wait@-xyz-openbmc_project-inventory.service
+Wants=mapper-wait@-xyz-openbmc_project-network-%i.service
+After=mapper-wait@-xyz-openbmc_project-network-%i.service
+Wants=obmc-read-eeprom@system-chassis-bmc.service
+After=obmc-read-eeprom@system-chassis-bmc.service
+
+[Service]
+ExecStart=/usr/bin/first-boot-set-mac.sh %i
+Type=oneshot
+RemainAfterExit=yes
+SyslogIdentifier=first-boot-set-mac
+Restart=on-failure
+RestartSec=20
+
+[Install]
+WantedBy=multi-user.target
