@@ -1,0 +1,9 @@
+Ok-To-Test+1: Jenkins <openbmc-ci-admin@ozlabs.org>
+Verified+1: Jenkins <openbmc-ci-admin@ozlabs.org>
+Code-Review+1: Joseph Liu <kwliu@nuvoton.com>
+Code-Review+2: Benjamin Fair <benjaminfair@google.com>
+Submitted-by: Samuel Jiang <Samuel.Jiang@quantatw.com>
+Submitted-at: Thu, 16 Jul 2020 09:03:09 +0000
+Reviewed-on: https://gerrit.openbmc-project.xyz/c/openbmc/meta-quanta/+/33544
+Project: openbmc/meta-quanta
+Branch: refs/heads/master
