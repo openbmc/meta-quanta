@@ -1,0 +1,257 @@
+diff --git a/drivers/hwmon/Kconfig b/drivers/hwmon/Kconfig
+index e244a7901392..c2d25e386a21 100644
+--- a/drivers/hwmon/Kconfig
++++ b/drivers/hwmon/Kconfig
+@@ -1374,6 +1374,16 @@ config SENSORS_RASPBERRYPI_HWMON
+ 	  This driver can also be built as a module. If so, the module
+ 	  will be called raspberrypi-hwmon.
+ 
++config SENSORS_SBTSI
++   tristate "Emulated SB-TSI temperature sensor"
++   depends on I2C
++   help
++     If you say yes here you get support for emulated temperature
++     sensors on AMD SoCs with SB-TSI interface connected to a BMC device.
++
++     This driver can also be built as a module. If so, the module will
++     be called sbtsi_temp.
++
+ config SENSORS_SHT15
+ 	tristate "Sensiron humidity and temperature sensors. SHT15 and compat."
+ 	depends on GPIOLIB || COMPILE_TEST
+diff --git a/drivers/hwmon/Makefile b/drivers/hwmon/Makefile
+index 1c7ab361adc7..79fbf06a3086 100644
+--- a/drivers/hwmon/Makefile
++++ b/drivers/hwmon/Makefile
+@@ -147,6 +147,7 @@ obj-$(CONFIG_SENSORS_POWR1220)  += powr1220.o
+ obj-$(CONFIG_SENSORS_PWM_FAN)	+= pwm-fan.o
+ obj-$(CONFIG_SENSORS_RASPBERRYPI_HWMON)	+= raspberrypi-hwmon.o
+ obj-$(CONFIG_SENSORS_S3C)	+= s3c-hwmon.o
++obj-$(CONFIG_SENSORS_SBTSI)    += sbtsi_temp.o
+ obj-$(CONFIG_SENSORS_SCH56XX_COMMON)+= sch56xx-common.o
+ obj-$(CONFIG_SENSORS_SCH5627)	+= sch5627.o
+ obj-$(CONFIG_SENSORS_SCH5636)	+= sch5636.o
+diff --git a/drivers/hwmon/sbtsi_temp.c b/drivers/hwmon/sbtsi_temp.c
+new file mode 100644
+index 000000000000..9eaba3ea1ed6
+--- /dev/null
++++ b/drivers/hwmon/sbtsi_temp.c
+@@ -0,0 +1,218 @@
++// SPDX-License-Identifier: GPL-2.0-or-later
++/*
++ * sbtsi_temp.c - hwmon driver for a SBI Temperature Sensor Interface (SB-TSI)
++ *                compliant AMD SoC temperature device.
++ *
++ * Copyright (c) 2020, Google Inc.
++ * Copyright (c) 2020, Kun Yi <kunyi@google.com>
++ */
++
++#include <linux/device.h>
++#include <linux/init.h>
++#include <linux/i2c.h>
++#include <linux/module.h>
++#include <linux/mutex.h>
++#include <linux/hwmon.h>
++#include <linux/hwmon-sysfs.h>
++
++/*
++ * SB-TSI registers only support SMBus byte data access. "_INT" registers are
++ * the integer part of a temperature value or limit, and "_DEC" registers are
++ * corresponding decimal parts.
++ */
++#define SBTSI_REG_TEMP_INT     0x01 /* RO */
++#define SBTSI_REG_STATUS       0x02 /* RO */
++#define SBTSI_REG_CONFIG       0x03 /* RO */
++#define SBTSI_REG_TEMP_HIGH_INT        0x07 /* RW */
++#define SBTSI_REG_TEMP_LOW_INT     0x08 /* RW */
++#define SBTSI_REG_TEMP_DEC     0x10 /* RW */
++#define SBTSI_REG_TEMP_HIGH_DEC        0x13 /* RW */
++#define SBTSI_REG_TEMP_LOW_DEC     0x14 /* RW */
++#define SBTSI_REG_REV          0xFF /* RO */
++
++#define SBTSI_CONFIG_READ_ORDER_SHIFT  5
++
++#define SBTSI_TEMP_MIN (0)
++#define SBTSI_TEMP_MAX (255875)
++#define SBTSI_REV_MAX_VALID_ID (4)
++
++struct sbtsi_data {
++   struct device *dev;
++   struct i2c_client *client;
++   struct mutex lock;
++};
++
++/*
++ * From SB-TSI spec: CPU temperature readings and limit registers encode the
++ * temperature in increments of 0.125 from 0 to 255.875. The "high byte"
++ * register encodes the base-2 of the integer portion, and the upper 3 bits of
++ * the "low byte" encode in base-2 the decimal portion.
++ *
++ * e.g. INT=0x19, DEC=0x20 represents 25.125 degrees Celsius
++ *
++ * Therefore temperature in millidegree Celsius =
++ *   (INT + DEC / 256) * 1000 = (INT * 8 + DEC / 32) * 125
++ */
++static inline int SBTSI_REGS_TO_TEMP(s32 integer, s32 decimal)
++{
++   return (((u32)integer << 3) + ((u32)decimal >> 5)) * 125;
++}
++
++/*
++ * Inversely, given temperature in millidegree Celsius
++ *   INT = (TEMP / 125) / 8
++ *   DEC = ((TEMP / 125) % 8) * 32
++ * Caller have to make sure temp doesn't exceed 255875, the max valid value.
++ */
++static inline void SBTSI_TEMP_TO_REGS(u32 temp, u8 *integer, u8 *decimal)
++{
++   temp /= 125;
++   *integer = temp >> 3;
++   *decimal = (temp & 0x7) << 5;
++}
++
++static ssize_t sbtsi_show_temp(struct device *dev,
++                  struct device_attribute *attr, char *buf)
++{
++   struct sbtsi_data *data = dev_get_drvdata(dev);
++   struct i2c_client *client = data->client;
++   s32 err, temp_int, temp_dec;
++   u8 read_order;
++
++   /*
++    * ReadOrder bit specifies the reading order of integer and decimal
++    * part of CPU temp for atomic reads. If bit == 0, reading integer part
++    * triggers latching of the decimal part, so integer part should be read
++    * first. If bit == 1, read order should be reversed.
++    */
++   err = i2c_smbus_read_byte_data(client, SBTSI_REG_CONFIG);
++   if (err < 0)
++       return err;
++
++   read_order = (u8)err & BIT(SBTSI_CONFIG_READ_ORDER_SHIFT);
++
++   if (read_order == 0) {
++       temp_int = i2c_smbus_read_byte_data(client, SBTSI_REG_TEMP_INT);
++       temp_dec = i2c_smbus_read_byte_data(client, SBTSI_REG_TEMP_DEC);
++   } else {
++       temp_dec = i2c_smbus_read_byte_data(client, SBTSI_REG_TEMP_DEC);
++       temp_int = i2c_smbus_read_byte_data(client, SBTSI_REG_TEMP_INT);
++   }
++
++   if (temp_int < 0)
++       return temp_int;
++   if (temp_dec < 0)
++       return temp_dec;
++
++   return scnprintf(buf, PAGE_SIZE, "%d\n",
++            SBTSI_REGS_TO_TEMP(temp_int, temp_dec));
++}
++
++#define sbtsi_show_temp_limit(name, REG) \
++static ssize_t sbtsi_show_##name(struct device *dev, \
++                struct device_attribute *attr, char *buf) \
++{ \
++   struct sbtsi_data *data = dev_get_drvdata(dev); \
++   struct i2c_client *client = data->client; \
++   s32 temp_int, temp_dec; \
++\
++   temp_int = i2c_smbus_read_byte_data(client, REG##_INT); \
++   temp_dec = i2c_smbus_read_byte_data(client, REG##_DEC); \
++\
++   if (temp_int < 0) \
++       return temp_int; \
++   if (temp_dec < 0) \
++       return temp_dec; \
++\
++   return scnprintf(buf, PAGE_SIZE, "%d\n", \
++            SBTSI_REGS_TO_TEMP(temp_int, temp_dec)); \
++}
++
++sbtsi_show_temp_limit(temp1_min, SBTSI_REG_TEMP_LOW);
++sbtsi_show_temp_limit(temp1_max, SBTSI_REG_TEMP_HIGH);
++
++#define sbtsi_set_temp_limit(name, REG) \
++static ssize_t sbtsi_set_##name(struct device *dev, \
++               struct device_attribute *attr, \
++               const char *buf, size_t count) \
++{ \
++   struct sbtsi_data *data = dev_get_drvdata(dev); \
++   struct i2c_client *client = data->client; \
++   long val; \
++   u8 temp_int, temp_dec; \
++   int err = kstrtol(buf, 10, &val); \
++   if (err) \
++       return err; \
++\
++   val = clamp_val(val, SBTSI_TEMP_MIN, SBTSI_TEMP_MAX); \
++   mutex_lock(&data->lock); \
++   SBTSI_TEMP_TO_REGS(val, &temp_int, &temp_dec); \
++   i2c_smbus_write_byte_data(client, REG##_INT, temp_int); \
++   i2c_smbus_write_byte_data(client, REG##_DEC, temp_dec); \
++   mutex_unlock(&data->lock); \
++\
++   return count; \
++}
++
++sbtsi_set_temp_limit(temp1_min, SBTSI_REG_TEMP_LOW);
++sbtsi_set_temp_limit(temp1_max, SBTSI_REG_TEMP_HIGH);
++
++static SENSOR_DEVICE_ATTR(temp1_input, 0444, sbtsi_show_temp, NULL, 0);
++static SENSOR_DEVICE_ATTR(temp1_min, 0644, sbtsi_show_temp1_min,
++             sbtsi_set_temp1_min, 1);
++static SENSOR_DEVICE_ATTR(temp1_max, 0644, sbtsi_show_temp1_max,
++             sbtsi_set_temp1_max, 2);
++
++static struct attribute *sbtsi_attrs[] = {
++   &sensor_dev_attr_temp1_input.dev_attr.attr,
++   &sensor_dev_attr_temp1_min.dev_attr.attr,
++   &sensor_dev_attr_temp1_max.dev_attr.attr,
++   NULL,
++};
++ATTRIBUTE_GROUPS(sbtsi);
++
++static int sbtsi_probe(struct i2c_client *client,
++              const struct i2c_device_id *id)
++{
++   struct device *dev = &client->dev;
++   struct device *hwmon_dev;
++   struct sbtsi_data *data;
++
++   data = devm_kzalloc(dev, sizeof(struct sbtsi_data), GFP_KERNEL);
++   if (!data)
++       return -ENOMEM;
++
++   data->client = client;
++   mutex_init(&data->lock);
++
++   hwmon_dev =
++       devm_hwmon_device_register_with_groups(dev, client->name, data,
++                              sbtsi_groups);
++   if (IS_ERR(hwmon_dev))
++       return PTR_ERR(hwmon_dev);
++
++   dev_info(dev, "sensor '%s'\n", client->name);
++
++   return 0;
++}
++
++static const struct i2c_device_id sbtsi_id[] = {
++   {"sbtsi", 0},
++   {}
++};
++MODULE_DEVICE_TABLE(i2c, sbtsi_id);
++
++static struct i2c_driver sbtsi_driver = {
++   .class = I2C_CLASS_HWMON,
++   .driver = {
++       .name = "sbtsi",
++   },
++   .probe = sbtsi_probe,
++   .id_table = sbtsi_id,
++};
++
++module_i2c_driver(sbtsi_driver);
++
++MODULE_AUTHOR("Kun Yi <kunyi@google.com>");
++MODULE_DESCRIPTION("Hwmon driver for AMD SB-TSI emulated sensor");
++MODULE_LICENSE("GPL");
