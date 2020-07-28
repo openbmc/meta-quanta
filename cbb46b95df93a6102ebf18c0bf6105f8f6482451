@@ -1,0 +1,8 @@
+Ok-To-Test+1: OpenBMC CI <openbmcbump-ci@yahoo.com>
+Verified+1: OpenBMC CI <openbmcbump-ci@yahoo.com>
+Code-Review+2: Samuel Jiang <Samuel.Jiang@quantatw.com>
+Submitted-by: Samuel Jiang <Samuel.Jiang@quantatw.com>
+Submitted-at: Tue, 28 Jul 2020 02:02:25 +0000
+Reviewed-on: https://gerrit.openbmc-project.xyz/c/openbmc/meta-quanta/+/33792
+Project: openbmc/meta-quanta
+Branch: refs/heads/master
