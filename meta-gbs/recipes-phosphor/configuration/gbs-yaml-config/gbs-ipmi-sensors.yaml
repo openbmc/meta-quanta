@@ -349,28 +349,28 @@
 0x40:
   <<: *voltage
   entityInstance: 0x10
-  path: /xyz/openbmc_project/sensors/voltage/vddq_abcd_out
+  path: /xyz/openbmc_project/sensors/voltage/vddio_abcd_out
   multiplierM: 78
   rExp: -4
 
 0x41:
   <<: *voltage_13v5_in
   entityInstance: 0x11
-  path: /xyz/openbmc_project/sensors/voltage/vddq_abcd_in
+  path: /xyz/openbmc_project/sensors/voltage/vddio_abcd_in
   multiplierM: 55
   rExp: -3
 
 0x55:
   <<: *current
   entityInstance: 0x19
-  path: /xyz/openbmc_project/sensors/current/vddq_abcd_in
+  path: /xyz/openbmc_project/sensors/current/vddio_abcd_in
   multiplierM: 353
   rExp: -4
 
 0x54:
   <<: *current
   entityInstance: 0x18
-  path: /xyz/openbmc_project/sensors/current/vddq_abcd_out
+  path: /xyz/openbmc_project/sensors/current/vddio_abcd_out
   multiplierM: 345
   rExp: -3
 
@@ -378,28 +378,28 @@
 0x42:
   <<: *voltage
   entityInstance: 0x12
-  path: /xyz/openbmc_project/sensors/voltage/vddq_efgh_out
+  path: /xyz/openbmc_project/sensors/voltage/vddio_efgh_out
   multiplierM: 78
   rExp: -4
 
 0x43:
   <<: *voltage_13v5_in
   entityInstance: 0x13
-  path: /xyz/openbmc_project/sensors/voltage/vddq_efgh_in
+  path: /xyz/openbmc_project/sensors/voltage/vddio_efgh_in
   multiplierM: 55
   rExp: -3
 
 0x57:
   <<: *current
   entityInstance: 0x1b
-  path: /xyz/openbmc_project/sensors/current/vddq_efgh_in
+  path: /xyz/openbmc_project/sensors/current/vddio_efgh_in
   multiplierM: 353
   rExp: -4
 
 0x56:
   <<: *current
   entityInstance: 0x1a
-  path: /xyz/openbmc_project/sensors/current/vddq_efgh_out
+  path: /xyz/openbmc_project/sensors/current/vddio_efgh_out
   multiplierM: 345
   rExp: -3
 
@@ -407,28 +407,28 @@
 0x47:
   <<: *voltage
   entityInstance: 0x20
-  path: /xyz/openbmc_project/sensors/voltage/p12v_1_out
+  path: /xyz/openbmc_project/sensors/voltage/p12v_mobo_out
   multiplierM: 55
   rExp: -3
 
 0x48:
   <<: *voltage_13v5_in
   entityInstance: 0x21
-  path: /xyz/openbmc_project/sensors/voltage/p12v_1_in
+  path: /xyz/openbmc_project/sensors/voltage/p12v_mobo_in
   multiplierM: 255
   rExp: -3
 
 0x5A:
   <<: *current
   entityInstance: 0x25
-  path: /xyz/openbmc_project/sensors/current/p12v_1_in
+  path: /xyz/openbmc_project/sensors/current/p12v_mobo_in
   multiplierM: 137
   rExp: -3
 
 0x59:
   <<: *current
   entityInstance: 0x24
-  path: /xyz/openbmc_project/sensors/current/p12v_1_out
+  path: /xyz/openbmc_project/sensors/current/p12v_mobo_out
   multiplierM: 59
   rExp: -2
 
@@ -436,28 +436,28 @@
 0x49:
   <<: *voltage
   entityInstance: 0x22
-  path: /xyz/openbmc_project/sensors/voltage/p12v_2_out
+  path: /xyz/openbmc_project/sensors/voltage/p12v_fan_out
   multiplierM: 55
   rExp: -3
 
 0x4A:
   <<: *voltage_13v5_in
   entityInstance: 0x23
-  path: /xyz/openbmc_project/sensors/voltage/p12v_2_in
+  path: /xyz/openbmc_project/sensors/voltage/p12v_fan_in
   multiplierM: 255
   rExp: -3
 
 0x5C:
   <<: *current
   entityInstance: 0x27
-  path: /xyz/openbmc_project/sensors/current/p12v_2_in
+  path: /xyz/openbmc_project/sensors/current/p12v_fan_in
   multiplierM: 137
   rExp: -3
 
 0x5B:
   <<: *current
   entityInstance: 0x26
-  path: /xyz/openbmc_project/sensors/current/p12v_2_out
+  path: /xyz/openbmc_project/sensors/current/p12v_fan_out
   multiplierM: 59
   rExp: -2
 
@@ -788,7 +788,7 @@
   entityID: 0x04
   entityInstance: 0x30
   sensorType: 0x0D
-  path: /xyz/openbmc_project/inventory/system/chassis/motherboard/nvme0
+  path: /xyz/openbmc_project/inventory/system/chassis/motherboard/nvme0_prsnt
   sensorReadingType: 0x6F
   mutability: Mutability::Write|Mutability::Read
   serviceInterface: org.freedesktop.DBus.Properties
@@ -806,77 +806,77 @@
 0xB1:
   <<: *present
   entityInstance: 0x31
-  path: /xyz/openbmc_project/inventory/system/chassis/motherboard/nvme1
+  path: /xyz/openbmc_project/inventory/system/chassis/motherboard/nvme1_prsnt
 
 0xB2:
   <<: *present
   entityInstance: 0x32
-  path: /xyz/openbmc_project/inventory/system/chassis/motherboard/nvme2
+  path: /xyz/openbmc_project/inventory/system/chassis/motherboard/nvme2_prsnt
 
 0xB3:
   <<: *present
   entityInstance: 0x33
-  path: /xyz/openbmc_project/inventory/system/chassis/motherboard/nvme3
+  path: /xyz/openbmc_project/inventory/system/chassis/motherboard/nvme3_prsnt
 
 0xB4:
   <<: *present
   entityInstance: 0x34
-  path: /xyz/openbmc_project/inventory/system/chassis/motherboard/nvme4
+  path: /xyz/openbmc_project/inventory/system/chassis/motherboard/nvme4_prsnt
 
 0xB5:
   <<: *present
   entityInstance: 0x35
-  path: /xyz/openbmc_project/inventory/system/chassis/motherboard/nvme5
+  path: /xyz/openbmc_project/inventory/system/chassis/motherboard/nvme5_prsnt
 
 0xB6:
   <<: *present
   entityInstance: 0x36
-  path: /xyz/openbmc_project/inventory/system/chassis/motherboard/nvme6
+  path: /xyz/openbmc_project/inventory/system/chassis/motherboard/nvme6_prsnt
 
 0xB7:
   <<: *present
   entityInstance: 0x37
-  path: /xyz/openbmc_project/inventory/system/chassis/motherboard/nvme7
+  path: /xyz/openbmc_project/inventory/system/chassis/motherboard/nvme7_prsnt
 
 0xB8:
   <<: *present
   entityInstance: 0x38
-  path: /xyz/openbmc_project/inventory/system/chassis/motherboard/nvme8
+  path: /xyz/openbmc_project/inventory/system/chassis/motherboard/nvme8_prsnt
 
 0xB9:
   <<: *present
   entityInstance: 0x39
-  path: /xyz/openbmc_project/inventory/system/chassis/motherboard/nvme9
+  path: /xyz/openbmc_project/inventory/system/chassis/motherboard/nvme9_prsnt
 
 0xBA:
   <<: *present
   entityInstance: 0x3a
-  path: /xyz/openbmc_project/inventory/system/chassis/motherboard/nvme10
+  path: /xyz/openbmc_project/inventory/system/chassis/motherboard/nvme10_prsnt
 
 0xBB:
   <<: *present
   entityInstance: 0x3b
-  path: /xyz/openbmc_project/inventory/system/chassis/motherboard/nvme11
+  path: /xyz/openbmc_project/inventory/system/chassis/motherboard/nvme11_prsnt
 
 0xBC:
   <<: *present
   entityInstance: 0x3c
-  path: /xyz/openbmc_project/inventory/system/chassis/motherboard/nvme12
+  path: /xyz/openbmc_project/inventory/system/chassis/motherboard/nvme12_prsnt
 
 0xBD:
   <<: *present
   entityInstance: 0x3d
-  path: /xyz/openbmc_project/inventory/system/chassis/motherboard/nvme13
+  path: /xyz/openbmc_project/inventory/system/chassis/motherboard/nvme13_prsnt
 
 0xBE:
   <<: *present
   entityInstance: 0x3e
-  path: /xyz/openbmc_project/inventory/system/chassis/motherboard/nvme14
+  path: /xyz/openbmc_project/inventory/system/chassis/motherboard/nvme14_prsnt
 
 0xBF:
   <<: *present
   entityInstance: 0x3f
-  path: /xyz/openbmc_project/inventory/system/chassis/motherboard/nvme15
+  path: /xyz/openbmc_project/inventory/system/chassis/motherboard/nvme15_prsnt
 
 0xC0: &nvme_power
   entityID: 0x04
