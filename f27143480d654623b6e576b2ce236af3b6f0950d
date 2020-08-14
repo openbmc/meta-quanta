@@ -1,0 +1,9 @@
+Ok-To-Test+1: OpenBMC CI <openbmcbump-ci@yahoo.com>
+Verified+1: OpenBMC CI <openbmcbump-ci@yahoo.com>
+Code-Review+1: George Hung <george.hung@quantatw.com>
+Code-Review+2: Benjamin Fair <benjaminfair@google.com>
+Submitted-by: Brandon Kim <brandonkim@google.com>
+Submitted-at: Fri, 14 Aug 2020 17:58:13 +0000
+Reviewed-on: https://gerrit.openbmc-project.xyz/c/openbmc/meta-quanta/+/35581
+Project: openbmc/meta-quanta
+Branch: refs/heads/master
