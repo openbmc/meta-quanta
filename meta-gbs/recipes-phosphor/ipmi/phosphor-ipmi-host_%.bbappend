@@ -8,6 +8,7 @@ SRCREV_gbs = "1670af57eee1d33018665cb1bce9ae5ed28470cd"
 FILESEXTRAPATHS_prepend_gbs := "${THISDIR}/${PN}:"
 SRC_URI_append_gbs = " file://gbs-ipmid-whitelist.conf \
                        file://0063-Save-the-pre-timeout-interrupt-in-dbus-property.patch \
+                       file://0001-meta-gbs-Add-a-new-sensorNamePattern-to-phosphor-hos.patch \
                      "
 
 WHITELIST_CONF_gbs = "${WORKDIR}/gbs-ipmid-whitelist.conf"

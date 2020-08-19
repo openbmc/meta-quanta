@@ -1,0 +1,56 @@
+From cc66d1a86c89197a0199cc2d5a3904e88749c11e Mon Sep 17 00:00:00 2001
+From: Eddielu <Eddie.Lu@quantatw.com>
+Date: Wed, 19 Aug 2020 09:14:32 +0800
+Subject: [PATCH] meta-gbs: Add a new `sensorNamePattern` to
+ phosphor-host-ipmid
+
+---
+ sensordatahandler.cpp |  9 +++++++++
+ sensordatahandler.hpp | 11 +++++++++++
+ 2 files changed, 20 insertions(+)
+
+diff --git a/sensordatahandler.cpp b/sensordatahandler.cpp
+index fc74b8f..754a682 100644
+--- a/sensordatahandler.cpp
++++ b/sensordatahandler.cpp
+@@ -109,6 +109,15 @@ ipmi_ret_t updateToDbus(IpmiUpdateData& msg)
+ 
+ namespace get
+ {
++SensorName nameLeafSuffix(const Info& sensorInfo)
++{
++    const auto pos = sensorInfo.sensorPath.find_last_of('/');
++    const auto leaf = sensorInfo.sensorPath.substr(pos + 1);
++
++    auto suffix = leaf + "_prsnt";
++
++    return suffix;
++}
+ 
+ SensorName nameParentLeaf(const Info& sensorInfo)
+ {
+diff --git a/sensordatahandler.hpp b/sensordatahandler.hpp
+index c48140a..415153a 100644
+--- a/sensordatahandler.hpp
++++ b/sensordatahandler.hpp
+@@ -111,6 +111,17 @@ inline SensorName nameLeaf(const Info& sensorInfo)
+  */
+ SensorName nameParentLeaf(const Info& sensorInfo);
+ 
++/** @brief Populate sensor name from the D-Bus object associated with the
++ *         sensor. If the object path is /system/chassis/motherboard/nvme0
++ *         then the sensor name is nvme0_prsnt. The leaf and the suffix is put
++ *         together to get the sensor name.
++ *
++ *  @param[in] sensorInfo - Dbus info related to sensor.
++ *
++ *  @return On success return the sensor name for the sensor.
++ */
++SensorName nameLeafSuffix(const Info& sensorInfo);
++
+ /**
+  *  @brief Helper function to map the dbus info to sensor's assertion status
+  *         for the get sensor reading command.
+-- 
+2.7.4
+
