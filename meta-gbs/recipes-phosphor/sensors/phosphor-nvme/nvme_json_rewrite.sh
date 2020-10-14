@@ -8,6 +8,11 @@ export_gpio() {
   fi
 }
 
+mapper wait /xyz/openbmc_project/inventory/system/chassis/cable/ss_cab0_prsnt
+mapper wait /xyz/openbmc_project/inventory/system/chassis/cable/ss_cab1_prsnt
+mapper wait /xyz/openbmc_project/inventory/system/chassis/cable/ss_cab2_prsnt
+mapper wait /xyz/openbmc_project/inventory/system/chassis/cable/ss_cab3_prsnt
+
 # Get NVMeDrivePresentPins
 # 1-0024
 

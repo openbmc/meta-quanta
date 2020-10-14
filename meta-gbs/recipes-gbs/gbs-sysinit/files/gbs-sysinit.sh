@@ -67,12 +67,12 @@ get_board_sku_id() {
     | sed 's/ //g' > ~/board_sku_id.txt
 }
 
-get_hsp_board_rev_id() {
+get_hsbp_board_rev_id() {
     echo $(get_gpio_value 'HSBP_BRD_REV_ID3')\
     $(get_gpio_value 'HSBP_BRD_REV_ID2')\
     $(get_gpio_value 'HSBP_BRD_REV_ID1')\
     $(get_gpio_value 'HSBP_BRD_REV_ID0')\
-    | sed 's/ //g' > ~/hsp_board_rev_id.txt
+    | sed 's/ //g' > ~/hsbp_board_rev_id.txt
 }
 
 get_fan_board_rev_id() {
@@ -122,7 +122,7 @@ set_hdd_prsnt() {
   # The signal is safe to set on DVT boards so just set universally.
   sata_prsnt_n="$(busctl get-property $SERVICE_NAME ${SATA0_PRESENT_OBJPATH} \
                  $INTERFACE_NAME Present | awk '{print $2}')"
-  if [[ ${sata_prsnt_n} != "true" ]]; then
+  if [[ "$?" == "0" ]] && [[ ${sata_prsnt_n} != "true" ]]; then
     return 1
   fi
   # sata_prsnt_n is active low => value "true" means low
@@ -192,7 +192,7 @@ parse_pe_fru() {
      pe_prsnt_n="$(busctl get-property $SERVICE_NAME ${PE_PRESENT_OBJPATH[$(($i-1))]} \
                   $INTERFACE_NAME Present | awk '{print $2}')"
 
-     if [[ ${pe_prsnt_n} != "true" ]]; then
+     if [[ "$?" == "0" ]] && [[ ${pe_prsnt_n} != "true" ]]; then
          pe_fruid=$(($pe_fruid+1))
          continue
      fi
@@ -232,6 +232,8 @@ check_power_status() {
 main() {
   get_board_rev_id
   get_board_sku_id
+  get_hsbp_board_rev_id
+  get_fan_board_rev_id
 
   check_board_ver
   if [[ "${BOARD_VER}" == "PREPVT" ]]; then
@@ -242,25 +244,19 @@ main() {
 
   hsbp_prsnt="$(busctl get-property $SERVICE_NAME ${HSBP_PRESENT_OBJPATH} \
                $INTERFACE_NAME Present | awk '{print $2}')"
-  if [[ ${hsbp_prsnt} == "true" ]]; then
-    get_hsp_board_rev_id
+  if [[ "$?" == "0" ]] && [[ ${hsbp_prsnt} == "true" ]]; then
     hsbp_12v_prsnt="$(busctl get-property $SERVICE_NAME ${BP12V_PRESENT_OBJPATH} \
                      $INTERFACE_NAME Present | awk '{print $2}')"
-    if [[ ${hsbp_12v_prsnt} != "true" ]]; then
+    if [[ "$?" == "0" ]] && [[ ${hsbp_12v_prsnt} != "true" ]]; then
       echo "HSBP board power cable(12V) not present !!"
     fi
   else
     echo "HSBP board sideband cable not present !!"
-    echo "Stop NVMe Power/LED control Service "
-    systemctl stop xyz.openbmc_project.Control.Nvme.Power
-    systemctl stop xyz.openbmc_project.nvme.manager
   fi
 
   fan_prsnt="$(busctl get-property $SERVICE_NAME ${FANBD_PRESENT_OBJPATH} \
               $INTERFACE_NAME Present | awk '{print $2}')"
-  if [[ ${fan_prsnt} == "true" ]]; then
-    get_fan_board_rev_id
-  else
+  if [[ "$?" == "0" ]] && [[ ${fan_prsnt} != "true" ]]; then
     echo "Fan board sideband cable not present !!"
   fi
 
