@@ -1,0 +1,10 @@
+Ok-To-Test+1: OpenBMC CI <openbmcbump-ci@yahoo.com>
+Code-Review+2: Benjamin Fair <benjaminfair@google.com>
+Code-Review+1: Tien-hung Huang <buddy.huang@quantatw.com>
+Verified+1: George Hung <george.hung@quantatw.com>
+Verified+1: OpenBMC CI <openbmcbump-ci@yahoo.com>
+Submitted-by: Patrick Williams <patrick@stwcx.xyz>
+Submitted-at: Wed, 04 Nov 2020 13:16:22 +0000
+Reviewed-on: https://gerrit.openbmc-project.xyz/c/openbmc/meta-quanta/+/37929
+Project: openbmc/meta-quanta
+Branch: refs/heads/master
