@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a997502a_07e803d4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000388
+      },
+      "writtenOn": "2021-01-21T00:09:06Z",
+      "side": 1,
+      "message": "nit: Add config-sku.json to make sure the correct fan hwmon sysfs path is replaced.",
+      "range": {
+        "startLine": 11,
+        "startChar": 17,
+        "endLine": 12,
+        "endChar": 28
+      },
+      "revId": "a08e73ff9f4300fe40301be929eecf080beaa573",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
