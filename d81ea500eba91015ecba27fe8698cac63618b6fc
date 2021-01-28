@@ -1,0 +1,8 @@
+Code-Review+2: George Hung <george.hung@quantatw.com>
+Verified+1: OpenBMC CI <openbmcbump-ci@yahoo.com>
+Ok-To-Test+1: OpenBMC CI <openbmcbump-ci@yahoo.com>
+Submitted-by: Tim Lee <timlee660101@gmail.com>
+Submitted-at: Thu, 28 Jan 2021 01:56:50 +0000
+Reviewed-on: https://gerrit.openbmc-project.xyz/c/openbmc/meta-quanta/+/39960
+Project: openbmc/meta-quanta
+Branch: refs/heads/master
