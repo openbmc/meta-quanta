@@ -1,0 +1,8 @@
+Code-Review+2: Fran Hsu <fran.hsu@quantatw.com>
+Verified+1: OpenBMC CI <openbmcbump-ci@yahoo.com>
+Ok-To-Test+1: OpenBMC CI <openbmcbump-ci@yahoo.com>
+Submitted-by: Stanley Chu <yschu@nuvoton.com>
+Submitted-at: Thu, 28 Jan 2021 01:25:05 +0000
+Reviewed-on: https://gerrit.openbmc-project.xyz/c/openbmc/meta-quanta/+/39959
+Project: openbmc/meta-quanta
+Branch: refs/heads/master
