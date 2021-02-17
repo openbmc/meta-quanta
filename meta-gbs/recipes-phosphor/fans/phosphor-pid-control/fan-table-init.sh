@@ -13,8 +13,6 @@ mapper wait /xyz/openbmc_project/sensors/fan_tach/fb_fan0
 mapper wait /xyz/openbmc_project/sensors/fan_tach/fb_fan1
 mapper wait /xyz/openbmc_project/sensors/fan_tach/fb_fan2
 
-/usr/bin/fan-default-speed.sh
-
 # generate fan table writePath
 Fan_0_To_4_Hwmon="$(ls -la /sys/class/hwmon |grep pwm |  head -n 1| tail -n +1|cut -d '/' -f 9)"
 

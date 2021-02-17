@@ -1,6 +1,8 @@
 [Unit]
 Description=Detect Fan Fail Manager
 After=phosphor-pid-control.service
+Wants=mapper-wait@-xyz-openbmc_project-inventory.service
+After=mapper-wait@-xyz-openbmc_project-inventory.service
 
 [Service]
 ExecStart=/usr/bin/gbs-detect-fan-fail.sh
